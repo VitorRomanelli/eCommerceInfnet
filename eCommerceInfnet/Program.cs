@@ -1,14 +1,21 @@
 using eCommerceInfnet.Application.Interfaces;
 using eCommerceInfnet.Application.Services;
 using eCommerceInfnet.Domain.Repositories;
+using eCommerceInfnet.Infrastructure.Persistence;
 using eCommerceInfnet.Infrastructure.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using System;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+string connection = builder.Configuration.GetConnectionString("EcommerceDb");
+
+builder.Services.AddDbContext<EcommerceDbContext>(options =>
+    options.UseMySql(connection, ServerVersion.AutoDetect(connection))
+    .EnableSensitiveDataLogging());
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

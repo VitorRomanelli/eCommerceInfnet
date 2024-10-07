@@ -8,6 +8,7 @@ namespace eCommerceInfnet.Domain.ValueObjects
 {
     public class Desconto
     {
+        public int Id { get; set; }
         public decimal Percentual { get; private set; }
 
         public Desconto(decimal percentual)

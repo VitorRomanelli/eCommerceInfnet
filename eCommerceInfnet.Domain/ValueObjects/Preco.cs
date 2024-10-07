@@ -8,6 +8,7 @@ namespace eCommerceInfnet.Domain.ValueObjects
 {
     public class Preco
     {
+        public int Id { get; set; }
         public decimal Valor { get; private set; }
 
         public Preco(decimal valor)

@@ -19,12 +19,10 @@ namespace eCommerceInfnet.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<Pedido> GetByIdAsync(int id)
+        public async Task<Pedido?> GetByIdAsync(int id)
         {
-            return await _context.Pedidos
-                .Include(p => p.Itens)
-                .Include(p => p.Cliente)
-                .FirstOrDefaultAsync(p => p.Id == id);
+            return await _context.Pedidos.Where(p => p.Id == id)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Pedido>> GetAllAsync()

@@ -1,18 +1,27 @@
 ﻿using eCommerceInfnet.Domain.Entities;
+using eCommerceInfnet.Domain.ValueObjects;
+using eCommerceInfnet.Infrastructure.ExternalServices.Pagamento.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCommerceInfnet.Infrastructure.ExternalServices
+namespace eCommerceInfnet.Infrastructure.ExternalServices.Pagamento
 {
-    public class PagamentoGateway
+    public class PagamentoCartaoCredito : IPagamento
     {
-        public async Task<bool> ProcessarPagamentoAsync(Pedido pedido, CartaoCredito cartaoCredito)
+        private readonly CartaoCredito _cartaoCredito;
+
+        public PagamentoCartaoCredito(CartaoCredito cartaoCredito)
         {
-            // Lógica para integrar com um serviço de pagamento (simulação)
-            bool pagamentoRealizado = await SimularPagamento(cartaoCredito, pedido.CalcularTotal());
+            _cartaoCredito = cartaoCredito;
+        }
+
+        public async Task<bool> ProcessarPagamentoAsync(Pedido pedido)
+        {
+            // Simulação de processamento de pagamento com cartão de crédito
+            bool pagamentoRealizado = await SimularPagamento(_cartaoCredito, pedido.CalcularTotal());
 
             if (pagamentoRealizado)
             {
@@ -28,7 +37,6 @@ namespace eCommerceInfnet.Infrastructure.ExternalServices
 
         private async Task<bool> SimularPagamento(CartaoCredito cartaoCredito, decimal valor)
         {
-            // Simulação de processamento de pagamento
             await Task.Delay(1000); // Simula o tempo de processamento
             return true; // Assume que o pagamento foi bem-sucedido
         }

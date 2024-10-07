@@ -1,6 +1,7 @@
 ﻿using eCommerceInfnet.Application.Interfaces;
 using eCommerceInfnet.Domain.Entities;
 using eCommerceInfnet.Domain.Repositories;
+using eCommerceInfnet.Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
